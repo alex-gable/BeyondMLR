@@ -11,10 +11,17 @@ render_book("index.Rmd", output_format = 'bookdown::gitbook')
 publish_book(render = "local")
 
 #render entire book as pdf for hard copy
-render_book("index.Rmd", output_format = 'bookdown::pdf_book')
+render_book("index.Rmd", 
+            output_format = 'bookdown::pdf_book',
+            new_session = TRUE)
+
+render_book("index.Rmd", 
+            output_format = 'bookdown::epub_book',
+            new_session = TRUE)
 
 #preview chapter as pdf
 preview_chapter("01-Introduction.Rmd", output_format = 'bookdown::pdf_book')
+preview_chapter("09-Two-Level-Longitudinal-Data.Rmd", output_format = 'bookdown::pdf_book')
 
 #preview chapter as html
 preview_chapter("07-Correlated-Data.Rmd", output_format = 'bookdown::gitbook')

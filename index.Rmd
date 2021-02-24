@@ -30,7 +30,7 @@ options(
 
 ```{r, cover, fig.show='hold', echo=FALSE, fig.cap="'Beyond Multiple Regression: Applied Generalized Linear Models and Multilevel Models in R' will be available in hard copy through Chapman and Hall / CRC Press in January 2021."}
 if(knitr::is_html_output()){
-  knitr::include_graphics("data/cover.png")}
+   knitr::include_graphics("data/cover.png")}
 ```
 
 **Beyond Multiple Linear Regression: Applied Generalized Linear Models and Multilevel Models in R** [@RProject] is intended to be accessible to undergraduate students who have successfully completed a regression course through, for example, a textbook like *Stat2* [@Cannon2019]. We started teaching this course at St. Olaf College in 2003 so students would be able to deal with the non-normal, correlated world we live in. It has been offered at St. Olaf every year since. Even though there is no mathematical prerequisite, we still introduce fairly sophisticated topics such as likelihood theory, zero-inflated Poisson, and parametric bootstrapping in an intuitive and applied manner. We believe strongly in case studies featuring real data and real research questions; thus, most of the data in the textbook (and [available at our GitHub repo](https://github.com/proback/BeyondMLR)) arises from collaborative research conducted by the authors and their students, or from student projects. Our goal is that, after working through this material, students will develop an expanded toolkit and a greater appreciation for the wider world of data and statistical modeling.
