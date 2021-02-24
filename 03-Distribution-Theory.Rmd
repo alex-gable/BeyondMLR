@@ -9,6 +9,10 @@ output:
 
 # Distribution Theory {#ch-distthry}
 
+```{r, include = FALSE}
+if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(knitr.table.format = "latex")}
+```
+
 ## Learning Objectives
 
 After finishing this chapter, you should be able to:
@@ -31,10 +35,6 @@ library(gridExtra)
 library(knitr) 
 library(kableExtra)
 library(tidyverse)
-```
-
-```{r include=FALSE}
-if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(knitr.table.format = "latex")}
 ```
 
 ## Introduction
@@ -79,7 +79,7 @@ Typical shapes of a binomial distribution are found in Figure \@ref(fig:multBin)
 
 ```{r, multBin, fig.align="center",out.width="60%",fig.cap= '(ref:multBin)', echo=FALSE, warning=FALSE, message=FALSE}
 #binomialPlots
-plotBinomial=function(n,p){
+plotBinomial <- function(n,p){
   y1 <- 0:n  # possible values
   prob <- dbinom(y1,n,p)  # P(Y=y)
   BBGdf <- data.frame(y1,prob)

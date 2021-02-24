@@ -9,7 +9,7 @@ output:
 
 # Generalized Linear Models: A Unifying Theory {#ch-glms}
 
-```{r,include=F}
+```{r, include = FALSE}
 if(knitr::is_html_output()){options(knitr.table.format = "html")} else {options(knitr.table.format = "latex")}
 ```
 
