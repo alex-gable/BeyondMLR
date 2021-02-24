@@ -32,6 +32,7 @@ library(lme4)
 library(knitr) 
 library(pander)
 library(tidyverse)
+library(kableExtra)
 ```
    
 ## Introduction to Logistic Regression

@@ -32,6 +32,7 @@ library(ggmosaic)
 library(knitr)
 library(kableExtra)
 library(tidyverse)
+library(broom)
 ```
 
 ```{r, include=F}
@@ -324,7 +325,7 @@ foo1 <- refdata %>%
     breaks = c(-Inf, 2, 4, 6, 8, 10, 12, 14, 16, 18, Inf),
     labels = c(1, 3, 5, 7, 9, 11, 13, 15, 17, 19))) %>%
   mutate(times = as.numeric(levels(group))[group]) %>%
-  select(-group)
+  dplyr::select(-group)
 
 foo1 %>% count(times, foul.home)
 table(foo1$foul.home, foo1$times)
@@ -475,7 +476,7 @@ As we saw in Section \@ref(twostage), to avoid clustering we could consider fitt
 # Model for Game 110 only (foul.diff as sole predictor)
 game110 <- refdata %>% 
   filter(game == 110) %>%   # pick off data for Game 110
-  select(.,4, 5, 6, 7, 9, 10, 15, 19)     
+  dplyr::select(.,4, 5, 6, 7, 9, 10, 15, 19)     
   # took out 2 and 12 - too wide
 
 kable(game110, booktabs=T, 
@@ -515,12 +516,12 @@ As in Section \@ref(twostage), we can proceed to fit similar logistic regression
 # Examine intercepts and slopes by game for model 
 #   with foul.diff as only predictor
 regressions <- refdata %>% 
-  group_by(game) %>% 
-  do(fit = glm(foul.home ~ foul.diff, family = binomial, 
-               data = .))
+  nest_by(game) %>% 
+  mutate(fit = list(glm(foul.home ~ foul.diff, family = binomial, 
+               data = data)))
 
 glm_info <- regressions %>%
-  tidy(fit) %>%
+  summarise(tidy(fit)) %>%
   ungroup() %>%
   dplyr::select(game, term, estimate) %>%
   spread(key = term, value = estimate) %>%
@@ -620,12 +621,12 @@ rate <- by(refdata, refdata$hometeam, function(data)
 summary(rate)
 
 regressions <- refdata %>% 
-  group_by(hometeam) %>% 
-  do(fit = glm(foul.home ~ foul.diff, family = binomial, 
-               data = .))
+  nest_by(hometeam) %>% 
+  mutate(fit = list(glm(foul.home ~ foul.diff, family = binomial, 
+               data = data)))
 
 glm_info <- regressions %>%
-  tidy(fit) %>%
+  summarise(tidy(fit)) %>%
   ungroup() %>%
   dplyr::select(hometeam, term, estimate) %>%
   spread(key = term, value = estimate) %>%
